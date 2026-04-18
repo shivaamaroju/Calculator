@@ -6,5 +6,6 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-# Java Swing app kabatti headless mode important
-ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "app.jar"]
+# Jenkins 8080 lo undi kabatti, manam 8081 use chesthunnam
+EXPOSE 8081
+ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "app.jar", "--server.port=8081"]
